@@ -1,8 +1,7 @@
-// import css from "./HomePage.module.css";
 import { useEffect, useState } from "react";
-// import { fetchTrendingMovies } from "../../services/api";
-import axios from "axios";
+
 import { fetchTrendingMovies } from "../../services/api";
+import MovieList from "../MovieList/MovieList";
 
 export default function HomePage() {
   const [movies, setMovies] = useState([]);
@@ -14,11 +13,8 @@ export default function HomePage() {
       try {
         setIsLoading(true);
         setError("");
-
-        // const data = await fetchTrendingMovies();
-        const response = await fetchTrendingMovies();
-
-        setMovies();
+        const data = await fetchTrendingMovies();
+        setMovies(data.results);
       } catch (error) {
         setError(error.message);
       } finally {
@@ -28,19 +24,14 @@ export default function HomePage() {
 
     asyncWrapper();
   }, []);
+
   return (
     <div>
-      Home
       <h1>Treding today</h1>
-      {/* <ul className={css.list}>
-        {movies.map((movie) => {
-          return (
-            <li key={movie.id} >
-             
-            </li>
-          );
-        })}
-      </ul> */}
+      <MovieList movies={movies} />
+      {isLoading && <div>Loading...</div>}
+      {error && <div>{error}</div>}
     </div>
   );
 }
+//

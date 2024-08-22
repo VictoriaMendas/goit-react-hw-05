@@ -1,18 +1,53 @@
 import { useSearchParams } from "react-router-dom";
+import { fetchMoviesByQuery } from "../../services/api";
+import { useEffect, useState } from "react";
+import MovieList from "../MovieList/MovieList";
 
 export default function MoviePage() {
-  // src/pages/Products.jsx
+  const [movies, setMovies] = useState([]);
+  const [searchParams, setSearchParams] = useSearchParams();
 
-  const [searchParams] = useSearchParams();
-  const name = searchParams.get("name");
-  const color = searchParams.get("color");
-  const maxPrice = searchParams.get("maxPrice");
+  const moviename = searchParams.get("moviename");
+  console.log(moviename);
+  // const [movies, setMovies] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    if (!moviename) return;
+
+    const asyncWrapper = async () => {
+      try {
+        setIsLoading(true);
+        setError("");
+        const data = await fetchMoviesByQuery(moviename);
+        setMovies(data.results);
+      } catch (error) {
+        setError(error.message);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    asyncWrapper();
+  }, [moviename]);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const form = e.currentTarget;
+    setSearchParams({ moviename: form.elements.moviename.value });
+    form.reset();
+  };
 
   return (
     <div>
-      <p>Name: {name}</p>
-      <p>Color: {color}</p>
-      <p>Maximum price: {maxPrice}</p>
+      <form onSubmit={handleSubmit}>
+        <input type="text" name="moviename" />
+        <button type="submit">Search</button>
+      </form>
+      <MovieList movies={movies} />
+      {isLoading && <div>Loading...</div>}
+      {error && <div>{error}</div>}
     </div>
   );
 }

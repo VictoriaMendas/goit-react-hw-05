@@ -7,7 +7,7 @@ import MovieDetailsPage from "./pages/MovieDetailsPage/MovieDetailsPage";
 import MovieCast from "./components/MovieCast/MovieCast";
 import MovieReviews from "./components/MovieReviews/MovieReviews";
 import NotFoundPage from "./pages/NotFoundPage/NotFoundPage";
-// import NotFoundPage from "./pages/NotFoundPage/NotFoundPage";
+
 function App() {
   return (
     <div>
