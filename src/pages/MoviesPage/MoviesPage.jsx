@@ -3,7 +3,7 @@ import { fetchMoviesByQuery } from "../../services/api";
 import { useEffect, useState } from "react";
 import MovieList from "../MovieList/MovieList";
 
-export default function MoviePage() {
+export default function MoviesPage() {
   const [movies, setMovies] = useState([]);
   const [searchParams, setSearchParams] = useSearchParams();
 
