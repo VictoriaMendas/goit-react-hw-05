@@ -1,0 +1,13 @@
+.cast {
+  display: block;
+  margin-top: 10px;
+}
+.photo {
+  width: 100px;
+  height: 150px;
+  margin-bottom: 10px;
+  list-style: none;
+}
+.cast :last-child {
+  margin-bottom: 10px;
+}

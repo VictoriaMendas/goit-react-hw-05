@@ -9,7 +9,7 @@ import css from "./MovieDetailsPage.module.css";
 import clsx from "clsx";
 import { useEffect, useRef, useState } from "react";
 import { fetchMovieDetails } from "../../services/api";
-import MovieInfo from "../../components/MovieInfo/MoviInfo";
+import MovieInfo from "../../components/MovieInfo/MovieInfo";
 
 export default function MovieDetailsPage() {
   const location = useLocation();
@@ -39,9 +39,11 @@ export default function MovieDetailsPage() {
 
   return (
     <div>
-      <Link to={backLink.current}>Go Back</Link>
+      <Link to={backLink.current} className={css.goBack}>
+        Go Back
+      </Link>
       {movieDetails && <MovieInfo movieDetails={movieDetails} />}
-      <div>
+      <div className={css.box}>
         <p>Additional information</p>
         <NavLink
           className={({ isActive }) =>
@@ -60,6 +62,8 @@ export default function MovieDetailsPage() {
           Reviews
         </NavLink>
         <Outlet />
+        {isLoading && <div>Loading...</div>}
+        {error && <div>{error}</div>}
       </div>
     </div>
   );

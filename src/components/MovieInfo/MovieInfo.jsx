@@ -1,3 +1,5 @@
+import css from "./MovieInfo.module.css";
+
 export default function MovieInfo({ movieDetails }) {
   const year = new Date(movieDetails.release_date).getFullYear();
   const percentage = movieDetails.vote_average * 10;
@@ -8,8 +10,8 @@ export default function MovieInfo({ movieDetails }) {
     : "https://dummyimage.com/400x600/cdcdcd/000.jpg&text=No+poster";
 
   return (
-    <div>
-      <img src={poster} alt={movieDetails.title} />
+    <div className={css.movieInfo}>
+      <img className={css.poster} src={poster} alt={movieDetails.title} />
       <div>
         <h2>
           {movieDetails.title} ({year})

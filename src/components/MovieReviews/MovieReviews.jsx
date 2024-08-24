@@ -27,14 +27,16 @@ export default function MovieReviews() {
 
   return (
     <ul>
-      {movieReview.map((results) => {
-        return (
-          <div key={results.id}>
-            <h3>{results.author}</h3>
-            <p>{results.author_details}</p>
-          </div>
-        );
-      })}
+      {!movieReview
+        ? "We dont have any reviews for this movie"
+        : movieReview.map((results) => {
+            return (
+              <div key={results.id}>
+                <h3>{results.author}</h3>
+                <p>{results.content}</p>
+              </div>
+            );
+          })}
       {isLoading && <div>Loading...</div>}
       {error && <div>{error}</div>}
     </ul>

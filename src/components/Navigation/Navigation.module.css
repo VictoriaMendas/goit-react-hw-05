@@ -1,19 +1,16 @@
 .buildLink {
   display: inline-block;
-  padding: 20px;
-  font-size: 18px;
-  border: 1px solid blue;
+  margin-bottom: 12px;
   background-color: transparent;
-  border-radius: 8px;
+  text-decoration: none;
   color: inherit;
   font-size: medium;
-  transition: all 0.3sec;
 }
 .linkActive {
-  background-color: black;
-  color: white;
+  color: red;
 }
 .nav {
   display: flex;
   gap: 10px;
+  box-shadow: 0px 3px 30px 0px gray;
 }

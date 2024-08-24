@@ -1,6 +1,15 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { fetchMovieCast } from "../../services/api";
+import css from "./MovieCast.module.css";
+
+const getPoster = (relativePoster) => {
+  const poster = relativePoster
+    ? `https://image.tmdb.org/t/p/w500${relativePoster}
+`
+    : "https://dummyimage.com/400x600/cdcdcd/000.jpg&text=No+poster";
+  return poster;
+};
 
 export default function MovieCast() {
   const { movieId } = useParams();
@@ -26,12 +35,16 @@ export default function MovieCast() {
   }, [movieId]);
 
   return (
-    <ul>
+    <ul className={css.cast}>
       {movieCast.map((cast) => {
         return (
           <div key={cast.id}>
             <li>
-              <img src={cast.profile_path} alt={cast.title} />
+              <img
+                className={css.photo}
+                src={getPoster(cast.profile_path)}
+                alt={cast.title}
+              />
             </li>
             <li>{cast.original_name}</li>
             <li>Charcter: {cast.character}</li>
